@@ -4,6 +4,7 @@ var cargoBox, cargoBoxImg;
 var cargoBoxes, cargoBoxesImg
 var geese, geeseImg;
 var backgroundImg;
+var background1Img
 var gameState = "wait";
 var button, buttonImg
 function preload(){
@@ -11,14 +12,17 @@ function preload(){
   cargoBoxImg = loadImage("cargoBox.png")
   //cargoBoxesImg = loadImage("cargoBoxes.png")
   geeseImg = loadImage("geese.png")
-  buttonImg = loadImage("playButton.jpg")
+  buttonImg = loadImage("playButton.png")
   backgroundImg = loadImage("background.jpg")
+  background1Img = loadImage("background2.jpg")
 }
 function setup() {
   createCanvas(windowWidth,windowHeight);
-airplane = createSprite(105,380)
+  //bg = createSprite(width/2,height/2);
+  //bg.addImage(backgroundImg);
+airplane = createSprite(250,380)
  airplane.addImage(airplaneImg);
- airplane.scale = 0.2;
+ airplane.scale = 0.08;
 airplane.visible = false;
 
  geese = createSprite(351,145);
@@ -39,7 +43,15 @@ cargoBox.visible = false;
 }
 
 function draw(){
- background(backgroundImg);
+  background("black");
+ image(background1Img,0,0,width*3,height);
+
+  if(gameState==="wait"){
+fill("blue")
+textSize(50);
+text("Airplane Game",width/2-250,height/2-150)
+//bg.addImage(backgroundImg);
+  }
 if(mousePressedOver(button) && gameState ==="wait"){
 gameState = "play"
 }
@@ -48,6 +60,20 @@ if(gameState ==="play"){
   airplane.visible = true;
   geese.visible = true;
   cargoBox.visible = true;
+  //background(background1Img);
+  //bg.addImage(background1Img);
+  handlePlayerControls();
 }
+
 drawSprites();
+}
+function handlePlayerControls(){
+  if(keyIsDown(RIGHT_ARROW)){
+  airplane.x +=3
+  }
+  if(keyIsDown(UP_ARROW)&& keyIsDown(RIGHT_ARROW)){
+    airplane.x +=3
+    airplane.y -=3
+  }
+  
 }
