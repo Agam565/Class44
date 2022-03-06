@@ -75,5 +75,7 @@ function handlePlayerControls(){
     airplane.x +=3
     airplane.y -=3
   }
-  
+  if(keyIsDown(DOWN_ARROW)){
+    airplane.y -=-3;
+  }
 }
